@@ -14,8 +14,10 @@ public class Faculty extends User {
   public int getOfficeNumber() { return officeNumber; }
   public void setOfficeNumber(int officeNumber) { this.officeNumber = officeNumber; }
 
-  public Faculty(String firstName, String lastName, String email) {
+  public Faculty(String firstName, String lastName, String email, int buildNumber, int officeNumber) {
     super(firstName, lastName, email);
+    this.buildingNumber = buildNumber;
+    this.officeNumber = officeNumber;
   }
 
   public Faculty() { }

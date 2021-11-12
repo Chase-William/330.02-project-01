@@ -38,9 +38,9 @@ public class User {
    * @param email
    * @return
    */
-  public static User from(UserType type, String firstName, String lastName, String email) { 
-    if (type.equals(UserType.FACULTY))
-      return new Faculty(firstName, lastName, email);
-    return new Student(firstName, lastName, email);
-  }
+  // public static User from(UserType type, String firstName, String lastName, String email) { 
+  //   if (type.equals(UserType.FACULTY))
+  //     return new Faculty(firstName, lastName, email);
+  //   return new Student(firstName, lastName, email);
+  // }
 }

@@ -32,10 +32,10 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 -- Table `Faculty`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Faculty` (
+  `UserID` INT NOT NULL,
   `BuildingNumber` INT NULL,
   `OfficeNumber` INT NULL,
-  `Password` VARCHAR(100) NOT NULL,
-  `UserID` INT NOT NULL,
+  `Password` VARCHAR(100) NOT NULL,  
   PRIMARY KEY (`UserID`),
   CONSTRAINT `Professor_User1_fk`
     FOREIGN KEY (`UserID`)

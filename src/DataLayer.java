@@ -8,20 +8,40 @@ public class DataLayer {
   static final String DEFAULT_DRIVER = "com.mysql.cj.jdbc.Driver";
   static final String DATABASE_NAME = "facultyresearch";
 
-  public void insertProfessor(Faculty user) {
+  PreparedStatement stmt;
+  ResultSet result;
+
+  public void insertProfessor(Faculty faculty) {
     try {
-      PreparedStatement stmt = conn.prepareStatement("INSERT INTO professor VALUES(?, ?, ?, ?, ?)");
-      stmt.setInt(1, id);
-      stmt.setString(2, fName);
-      stmt.setString(3, lName);
-      stmt.setString(4, street);
-      stmt.setString(5, zip);
-      int quantityInserted = stmt.executeUpdate();     
-      System.out.println("Number of rows inserted: " + quantityInserted);
+      // conn.setAutoCommit(false);
+      // // Insert backing user
+      // stmt = conn.prepareStatement("INSERT INTO User (FirstName, LastName, Email, UserType) VALUES (?, ?, ?, ?)");
+      // stmt.setString(1, faculty.getFirstName());
+      // stmt.setString(2, faculty.getLastName());
+      // stmt.setString(3, faculty.getEmail());
+      // stmt.setInt(4, User.UserType.FACULTY.ordinal());
+      // int rows = stmt.executeUpdate(SQL);
+      // result.next();
+      // int id = result.getInt(1);
+      // // Insert faculty
+      // stmt = conn.prepareStatement("INSERT INTO professor VALUES(?, ?, ?, ?, ?)");
+      // stmt.setInt(1, id);
+      // stmt.setInt(2, faculty.getBuildingNumber());
+      // stmt.setInt(3, faculty.getOfficeNumber());
+      // stmt.setString(4, faculty.getPassword());
+      
+      // conn.setAutoCommit(true);
     }
     catch (Exception ex) {
-      System.out.println("Failed to insert Passenger.");
-      System.out.println(ex.getLocalizedMessage());
+      System.err.println("Failed to insert User->Faculty.");
+      System.err.println(ex.getLocalizedMessage());
+      try {
+        conn.rollback();
+        conn.setAutoCommit(true);
+      }
+      catch (SQLException ex2) {
+        ex2.printStackTrace();
+      }
     }
   }
 
@@ -32,7 +52,7 @@ public class DataLayer {
   public boolean connect(String password) { 
     try {
 			conn = DriverManager.getConnection(
-        DATABASE_NAME,
+        "jdbc:mysql://localhost/" + DATABASE_NAME,
         "root",
         password
       );
