@@ -6,6 +6,8 @@ public class DataLayer {
   static final String DEFAULT_DRIVER = "com.mysql.cj.jdbc.Driver";
   static final String DATABASE_NAME = "facultyresearch";
 
+  
+
   /**
    * Connect the database using the cached creds.
    * @return False if failed, true if succeeded

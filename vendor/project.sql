@@ -29,9 +29,9 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 -- -----------------------------------------------------
--- Table `Professor`
+-- Table `Faculty`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Professor` (
+CREATE TABLE IF NOT EXISTS `Faculty` (
   `BuildingNumber` INT NULL,
   `OfficeNumber` INT NULL,
   `Password` VARCHAR(100) NOT NULL,
@@ -51,7 +51,7 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE IF NOT EXISTS `Abstract` (
   `AbstractID` INT NOT NULL,
   `Title` VARCHAR(65) NOT NULL,
-  `Description` VARCHAR(1000) NULL,
+  `FileName` VARCHAR(250) NULL UNIQUE,
   PRIMARY KEY (`AbstractID`))
 ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
@@ -120,14 +120,14 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `StudentKeyword` (
   `UserID` INT NOT NULL,
-  `Keyword_KeywordID` INT NOT NULL,
+  `KeywordID` INT NOT NULL,
   CONSTRAINT `StudentKeyword_Student_fk`
     FOREIGN KEY (`UserID`)
     REFERENCES `Student` (`UserID`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `StudentKeyword_Keyword_fk`
-    FOREIGN KEY (`Keyword_KeywordID`)
+    FOREIGN KEY (`KeywordID`)
     REFERENCES `Keyword` (`KeywordID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
