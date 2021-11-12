@@ -2,7 +2,7 @@ package models;
 
 public class User {
   public enum UserType {
-    PROFESSOR,
+    FACULTY,
     STUDENT
   }
 
@@ -39,8 +39,8 @@ public class User {
    * @return
    */
   public static User from(UserType type, String firstName, String lastName, String email) { 
-    if (type.equals(UserType.PROFESSOR))
-      return new Professor(firstName, lastName, email);
+    if (type.equals(UserType.FACULTY))
+      return new Faculty(firstName, lastName, email);
     return new Student(firstName, lastName, email);
   }
 }
