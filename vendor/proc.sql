@@ -49,7 +49,7 @@ CREATE PROCEDURE insertStudent(
 )
 BEGIN
   -- Call insert for User and capture the id for the user
-  CALL insertUser(firstName, lastName, email, 0, @id);
+  CALL insertUser(firstName, lastName, email, 1, @id);
 
   INSERT
     INTO Student
