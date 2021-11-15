@@ -44,6 +44,34 @@ public class DataLayer {
       }
     }
   }
+  public void insertStudent(Student student) {
+    try {
+      // conn.setAutoCommit(false);
+      // // Insert backing user
+      // stmt = conn.prepareStatement("INSERT INTO User (FirstName, LastName, Email, UserType) VALUES (?, ?, ?, ?)");
+      // stmt.setString(1, student.getFirstName());
+      // stmt.setString(2, student.getLastName());
+      // stmt.setString(3, student.getEmail());
+      // stmt.setInt(4, User.UserType.STUDENT.ordinal());
+      // int rows = stmt.executeUpdate(SQL);
+      // result.next();
+      // int id = result.getInt(1);
+      // // Insert student
+      
+      // conn.setAutoCommit(true);
+    }
+    catch (Exception ex) {
+      System.err.println("Failed to insert User->Student.");
+      System.err.println(ex.getLocalizedMessage());
+      try {
+        conn.rollback();
+        conn.setAutoCommit(true);
+      }
+      catch (SQLException ex2) {
+        ex2.printStackTrace();
+      }
+    }
+  }
 
   /**
    * Connect the database using the cached creds.
