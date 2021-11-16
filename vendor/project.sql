@@ -49,8 +49,8 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 -- Table `Abstract`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Abstract` (
-  `AbstractID` INT NOT NULL,
-  `Title` VARCHAR(65) NOT NULL,
+  `AbstractID` INT NOT NULL AUTO_INCREMENT,
+  `Title` VARCHAR(150) NOT NULL,
   `FileName` VARCHAR(250) NULL UNIQUE,
   PRIMARY KEY (`AbstractID`))
 ENGINE = InnoDB DEFAULT CHARSET=utf8;
@@ -79,7 +79,7 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 -- Table `Author`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Author` (
-  `AuthorID` INT NOT NULL,
+  `AuthorID` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(65) NOT NULL,
   `LastName` VARCHAR(65) NOT NULL,
   PRIMARY KEY (`AuthorID`))
