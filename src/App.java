@@ -1,12 +1,14 @@
 import java.util.*;
+import models.*;
+import services.File;
 
 public class App {
 
    private DataLayer data;
    private Scanner scan;
-   final String logMenu = "\nAre you a professor or student?\n1. Professor\n2. Student\n3. Exit the program";
-   final String studentMenu = "\nWhat would like you to do?\n1. Search professor(s) via interests\n2. Log out\n3. Exit the program";
-   final String professorMenu = "\nWhat would you like to do?\n1. Search and subscribe to abstracts\n2. View Subscribed Abstract\n3. Log out\n4. Exit the program";
+   final String logMenu = "\n\033[0;36mAre you a professor or student?\n\033[0;35m1. Professor\n2. Student\n3. Exit the program";
+   final String studentMenu = "\n\033[0;36mWhat would like you to do?\n\033[0;35m1. Search professor(s) via interests\n2. Log out\n3. Exit the program";
+   final String professorMenu = "\n\033[0;36mWhat would you like to do?\n\033[0;35m1. Search and subscribe to abstracts\n2. View subscribed abstracts\n3. Log out\n4. Exit the program";
 
    public App(DataLayer data, Scanner scan){
       this.data = data;
@@ -14,42 +16,43 @@ public class App {
    }
 
    public void run(){
-      // if(data.connect("")){
+      if(data.connect("qn182535")){
+         data.loadAbstracts(new File());
          System.out.println("Welcome to FacultyResearch!");
          menu("login", "[1-3]", logMenu);
-      // }
+      }
    }
 
-   public void logIn(String staff){
-      System.out.println("\nYou are logging in as a "+staff+"\n\nPlease enter your email and password");
+   public void logIn(String user){
+      System.out.println("\n\033[0;34mYou are logging in as a "+user+"\n\nPlease enter your email and password\033[0m");
       System.out.print("Email: ");
       String email = scan.nextLine();
 
       boolean isSuccess = false;
 
-      if(staff.equals("professor")){
+      if(user.equals("professor")){
          System.out.print("Password: ");
          String password = scan.nextLine();
          isSuccess = data.checkLog(email, password);
       }
-      else if(staff.equals("student")){
+      else if(user.equals("student"))
          isSuccess = data.checkLog(email);
-      }
 
       if(isSuccess){
-         //System.out.println("Successfully logged in.\nWelcome, "+data.user.getFirstName+" "+data.user.getLastName);
-         if(staff.equals("professor"))
+         if(data.user != null)
+            System.out.println("\n\033[0;32mSuccessfully logged in.\nWelcome, "+data.user.getFirstName()+" "+data.user.getLastName()+"!");
+         if(user.equals("professor"))
             menu("professor", "[1-4]", professorMenu);
-         else if(staff.equals("student"))
+         else if(user.equals("student"))
             menu("student", "[1-3]", studentMenu);
       }
       else
-         System.out.println("The email or password you entered is invalid");
+         System.out.println("\n\033[0;31mThe email or password you entered is either incorrect or not in the system.");
    }
 
    public void logOut(){
-      System.out.println("\nSuccessfully logged out.");
-      //data.user = null;
+      System.out.println("\n\033[0;32mSuccessfully logged out.");
+      data.user = null;
       menu("login", "[1-3]", logMenu);
    }
 
@@ -63,9 +66,8 @@ public class App {
                case "student" -> studentChoice(input);
             }
          }
-         else{
-            System.out.println("\nYou have entered invalid input, please try again");
-         }
+         else
+            System.out.println("\n\033[0;31mYou have entered invalid input, please try again");
       }
    }
 
@@ -73,7 +75,7 @@ public class App {
       switch(input){
          case 1 -> logIn("professor");
          case 2 -> logIn("student");
-         case 3 -> System.exit(0);
+         case 3 -> exit();
       }
    }
 
@@ -82,7 +84,7 @@ public class App {
          case 1 -> searchAbstracts();
          case 2 -> viewAbstracts();
          case 3 -> logOut();
-         case 4 -> System.exit(0);
+         case 4 -> exit();
       }
    }
 
@@ -90,22 +92,44 @@ public class App {
       switch(input){
          case 1 -> searchProfessors();
          case 2 -> logOut();
-         case 3 -> System.exit(0);
+         case 3 -> exit();
       }
    }
 
    public int getInput(String regexCondition, String menuString){
       System.out.println(menuString);
-      System.out.print("Option: ");
+      System.out.print("\033[0;36mOption:\033[0m ");
       String input = scan.nextLine();
       if(input.matches(regexCondition))
          return Integer.parseInt(input);
       return 0;
    }
 
+   public void exit(){
+      data.close();
+      System.exit(0);
+   }
+
    public void searchAbstracts(){
-      System.out.println("\nthis function [searchAbstracts] is out of service");
-      //data.searchAbstracts();
+      if(data.canSearchAbstracts()){
+         while(true){
+            int count = 1;
+            System.out.println("\n\033[0;36mEnter option to view abstract's detail\n\033[0;35m"+count+". Cancel searching");
+            for(Abstract abstracts : data.abstracts){
+               count++;
+               System.out.println(count +". "+(abstracts.getTitle()));
+            }
+            System.out.print("\033[0;36mOption:\033[0m ");
+            String input = scan.nextLine();
+            if(input.matches("[1-"+count+"]"))
+               if(!input.equals("1"))
+                  System.out.println(data.abstracts.get(Integer.parseInt(input)-2).toString());
+               else
+                  break;
+            else
+               System.out.println("\n\033[0;31mYou have entered invalid input");
+         }
+      }
    }
 
    public void viewAbstracts(){
