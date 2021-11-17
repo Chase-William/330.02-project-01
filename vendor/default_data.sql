@@ -97,6 +97,14 @@ DELIMITER ;
 CALL insertAbstractWithAuthors("Learn C and C++ by Samples", "Jim", "Habermas", NULL, NULL);
 CALL insertAbstractWithAuthors("C through Design", "George", "Defenbaugh", "Richard", "Smedley");
 CALL insertAbstractWithAuthors("Introduction to Computing and Programming in PYTHON - A Multimedia Approach", "Barbara", "Ericson", NULL, NULL);
+CALL insertAbstractWithAuthors("Data Structures and Program Design Using Java : A Self-Teaching Introduction", "D.", "Malhotra", "N.", "Malhotra");
+CALL insertAbstractWithAuthors("Exploring C++ 11", "Ray", "Lischner", NULL, NULL);
+CALL insertAbstractWithAuthors("Java Program Design: Principles, Polymorphism, and Patterns", "Edward", "Sciore", NULL, NULL);
+CALL insertAbstractWithAuthors("Practical C++ Design", "Adam", "Singer", NULL, NULL);
+CALL insertAbstractWithAuthors("Pro Python 3", "J.", "Browning", "Marty", "Alchin");
+CALL insertAbstractWithAuthors("Java: The Good Parts", "Jim", "Waldo", NULL, NULL);
+CALL insertAbstractWithAuthors("Advanced Algorithms and Data Structures", "Marcello", "Rocca", NULL, NULL);
+
 
 CALL insertFaculty("Leon", "West", "lw533@g.rit.edu", 130, 140, "s1v$c86gjil");
 CALL insertFaculty("Kristin", "Valentine", "kv6870@g.rit.edu", 150, 150, "*s$9d*");
