@@ -10,7 +10,7 @@ public class User {
   private String email;
   private String lastName;
   private String firstName;
-  
+
   public int getUserID() { return userID; }
 
   public String getEmail() { return email; }
@@ -21,11 +21,12 @@ public class User {
 
   public String getFirstName() { return firstName; }
   public void setFirstName(String firstName) { this.firstName = firstName; }
-  
-  protected User(String firstName, String lastName, String email) { 
+
+  protected User(int userID, String firstName, String lastName, String email) {
+    this.userID = userID;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.email = email;  
+    this.email = email;
   }
 
   protected User() { }
@@ -38,7 +39,7 @@ public class User {
    * @param email
    * @return
    */
-  // public static User from(UserType type, String firstName, String lastName, String email) { 
+  // public static User from(UserType type, String firstName, String lastName, String email) {
   //   if (type.equals(UserType.FACULTY))
   //     return new Faculty(firstName, lastName, email);
   //   return new Student(firstName, lastName, email);
