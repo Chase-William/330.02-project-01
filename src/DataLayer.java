@@ -15,6 +15,42 @@ public class DataLayer {
   private Statement stmt;
   private ResultSet rs;
 
+  public boolean insertAbstract(int facultyID, 
+                                String title, 
+                                String content, 
+                                String firstAuthorFirstName, 
+                                String firstAuthorLastName, 
+                                String secondAuthorFirstName, 
+                                String secondAuthorLastName
+  ) {
+    try {
+      conn.setAutoCommit(false);
+      CallableStatement calledStmt = conn.prepareCall("{ CALL insertAbstractWithAuthors(?, ? ,? ,? ,? ,? ,? ,?) }");
+      calledStmt.setInt(1, facultyID);
+      calledStmt.setString(2, title);
+      calledStmt.setString(3, content);
+      calledStmt.setString(4, firstAuthorFirstName);
+      calledStmt.setString(5, firstAuthorLastName);
+      calledStmt.setString(6, secondAuthorFirstName);
+      calledStmt.setString(7, secondAuthorLastName);
+      calledStmt.executeQuery();
+      
+      conn.commit();
+      conn.setAutoCommit(true);
+      return true;
+    }
+    catch (Exception ex) {
+      try {
+        conn.rollback();
+        conn.setAutoCommit(true); 
+      }      
+      catch (SQLException sqlEx) {
+        sqlEx.printStackTrace();
+      }      
+    }
+    return false;   
+  }
+
   public boolean checkLog(String email, String password) {
     // String sql = "SELECT * FROM user JOIN faculty USING(UserID) WHERE UserType =
     // 0 AND Email = '"+email+"' AND Password = '"+password+"';";

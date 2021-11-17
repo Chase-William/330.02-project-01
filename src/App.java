@@ -16,8 +16,8 @@ public class App {
    }
 
    public void run() {
-      if (data.connect("qn182535")) {
-         data.loadAbstracts(new File());
+      if (data.connect("Csharp304360283")) {
+         //data.loadAbstracts(new File());
          System.out.println("Welcome to FacultyResearch!");
          menu("login", "[1-3]", logMenu);
       }
@@ -80,10 +80,11 @@ public class App {
 
    public void professorChoice(int input) {
       switch (input) {
-      case 1 -> searchAbstracts();
-      case 2 -> viewAbstracts();
-      case 3 -> logOut();
-      case 4 -> exit();
+      case 1 -> insertAbstract();
+      case 2 -> searchAbstracts();
+      case 3 -> viewAbstracts();
+      case 4 -> logOut();
+      case 5 -> exit();
       }
    }
 
@@ -107,6 +108,26 @@ public class App {
    public void exit() {
       data.close();
       System.exit(0);
+   }
+
+   public void insertAbstract() {
+      System.out.print("Entering an Abstract\n\tEnter Title: ");
+      String title = scan.nextLine();
+      System.out.print("Entering an Abstract\n\tContent of the Abstract: ");
+      String content = scan.nextLine();
+      System.out.print("Entering an Abstract\n\tFirst Name of the First Author: ");
+      String firstAuthorFirstName = scan.nextLine();
+      System.out.print("Entering an Abstract\n\tLast Name of the First Author: ");
+      String firstAuthorLastName = scan.nextLine();
+      System.out.print("Entering an Abstract\n\tFirst Name of the Second Author: ");
+      String secondAuthorFirstName = scan.nextLine();
+      System.out.print("Entering an Abstract\n\tLast Name of the Second Author: ");
+      String secondAuthorLastName = scan.nextLine();
+      if (data.insertAbstract(data.user.getUserID(), title, content, firstAuthorFirstName, firstAuthorLastName, secondAuthorFirstName, secondAuthorLastName)){
+        System.out.println("Successfully Inserted the Abstract!");
+      } else {
+        System.out.println("Failed to Insert the Abstract!");
+      }
    }
 
    public void searchAbstracts() {

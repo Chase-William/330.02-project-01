@@ -61,6 +61,7 @@ END $$
 -- Inserts an abstract and must take atleast one author in the *first* author params. 
 -- Adding a second author  via the *second* author params is optional.
 CREATE PROCEDURE insertAbstractWithAuthors(
+  IN facultyID INT,
   IN title VARCHAR(150),
   IN firstAuthorFirstName VARCHAR(65),
   IN firstAuthorLastName VARCHAR(65),
@@ -90,21 +91,13 @@ BEGIN
     INSERT INTO AuthorAbstract 
       VALUES (@abID, @authID);
   END IF;
+
+  -- Insert UserAbstract
+  INSERT INTO UserAbstract
+    VALUES (facultyID, @abID);
 END $$
 
 DELIMITER ;
-
-CALL insertAbstractWithAuthors("Learn C and C++ by Samples", "Jim", "Habermas", NULL, NULL);
-CALL insertAbstractWithAuthors("C through Design", "George", "Defenbaugh", "Richard", "Smedley");
-CALL insertAbstractWithAuthors("Introduction to Computing and Programming in PYTHON - A Multimedia Approach", "Barbara", "Ericson", NULL, NULL);
-CALL insertAbstractWithAuthors("Data Structures and Program Design Using Java : A Self-Teaching Introduction", "D.", "Malhotra", "N.", "Malhotra");
-CALL insertAbstractWithAuthors("Exploring C++ 11", "Ray", "Lischner", NULL, NULL);
-CALL insertAbstractWithAuthors("Java Program Design: Principles, Polymorphism, and Patterns", "Edward", "Sciore", NULL, NULL);
-CALL insertAbstractWithAuthors("Practical C++ Design", "Adam", "Singer", NULL, NULL);
-CALL insertAbstractWithAuthors("Pro Python 3", "J.", "Browning", "Marty", "Alchin");
-CALL insertAbstractWithAuthors("Java: The Good Parts", "Jim", "Waldo", NULL, NULL);
-CALL insertAbstractWithAuthors("Advanced Algorithms and Data Structures", "Marcello", "Rocca", NULL, NULL);
-
 
 CALL insertFaculty("Leon", "West", "lw533@g.rit.edu", 130, 140, "s1v$c86gjil");
 CALL insertFaculty("Kristin", "Valentine", "kv6870@g.rit.edu", 150, 150, "*s$9d*");
@@ -156,6 +149,18 @@ CALL insertFaculty("Casey", "Pollard", "cp8615@g.rit.edu", 170, 110, "iuh^to39yb
 CALL insertFaculty("Abbey", "Mueller", "am3541@g.rit.edu", 180, 10, "b*&89nq6u3md");
 CALL insertFaculty("Clinton", "Roberson", "cr1311@g.rit.edu", 70, 10, "y@qj82iw9h72r2");
 CALL insertFaculty("Hugo", "Anderson", "ha9538@g.rit.edu", 190, 120, "cc8zw4lrfjc");
+
+-- Inserting Abstracted related to faculty, using a literal for the facultyID in this file, java is dynamic
+CALL insertAbstractWithAuthors(1, "Learn C and C++ by Samples", "Jim", "Habermas", NULL, NULL);
+CALL insertAbstractWithAuthors(2, "C through Design", "George", "Defenbaugh", "Richard", "Smedley");
+CALL insertAbstractWithAuthors(1, "Introduction to Computing and Programming in PYTHON - A Multimedia Approach", "Barbara", "Ericson", NULL, NULL);
+CALL insertAbstractWithAuthors(3, "Data Structures and Program Design Using Java : A Self-Teaching Introduction", "D.", "Malhotra", "N.", "Malhotra");
+CALL insertAbstractWithAuthors(4, "Exploring C++ 11", "Ray", "Lischner", NULL, NULL);
+CALL insertAbstractWithAuthors(5, "Java Program Design: Principles, Polymorphism, and Patterns", "Edward", "Sciore", NULL, NULL);
+CALL insertAbstractWithAuthors(6, "Practical C++ Design", "Adam", "Singer", NULL, NULL);
+CALL insertAbstractWithAuthors(7, "Pro Python 3", "J.", "Browning", "Marty", "Alchin");
+CALL insertAbstractWithAuthors(8, "Java: The Good Parts", "Jim", "Waldo", NULL, NULL);
+CALL insertAbstractWithAuthors(8 "Advanced Algorithms and Data Structures", "Marcello", "Rocca", NULL, NULL);
 
 CALL insertStudent("Regan", "Suarez", "rs404@g.rit.edu");
 CALL insertStudent("Elise", "Holden", "eh6257@g.rit.edu");
