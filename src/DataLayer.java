@@ -15,83 +15,82 @@ public class DataLayer {
   private Statement stmt;
   private ResultSet rs;
 
-  public boolean checkLog(String email, String password){
-    // String sql = "SELECT * FROM user JOIN faculty USING(UserID) WHERE UserType = 0 AND Email = '"+email+"' AND Password = '"+password+"';";
+  public boolean checkLog(String email, String password) {
+    // String sql = "SELECT * FROM user JOIN faculty USING(UserID) WHERE UserType =
+    // 0 AND Email = '"+email+"' AND Password = '"+password+"';";
     String sql = "SELECT * FROM user JOIN faculty USING(UserID) WHERE UserType = 0 AND Email = 'lw533@g.rit.edu' AND Password = 's1v$c86gjil';";
     return executeLog(sql, "professor");
   }
 
-  public boolean checkLog(String email){
-    String sql = "SELECT * FROM user JOIN student USING(UserID) WHERE Email = '"+email+"';";
+  public boolean checkLog(String email) {
+    String sql = "SELECT * FROM user JOIN student USING(UserID) WHERE Email = '" + email + "';";
     return executeLog(sql, "student");
   }
 
-  public boolean executeLog(String sqlStatement, String userType){
+  public boolean executeLog(String sqlStatement, String userType) {
     try {
       conn.setAutoCommit(false);
       stmt = conn.createStatement();
       rs = stmt.executeQuery(sqlStatement);
-      while(rs.next()){
-        if(userType.equals("professor"))
-          user = new Faculty(rs.getInt("UserID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), rs.getInt("BuildingNumber"), rs.getInt("OfficeNumber"));
-        else if(userType.equals("student"))
-          user = new Student(rs.getInt("UserID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"));
+      while (rs.next()) {
+        if (userType.equals("professor"))
+          user = new Faculty(rs.getInt("UserID"), rs.getString("FirstName"), rs.getString("LastName"),
+              rs.getString("Email"), rs.getInt("BuildingNumber"), rs.getInt("OfficeNumber"));
+        else if (userType.equals("student"))
+          user = new Student(rs.getInt("UserID"), rs.getString("FirstName"), rs.getString("LastName"),
+              rs.getString("Email"));
         break;
       }
       conn.setAutoCommit(true);
-      if(rs.getRow() == 1)
+      if (rs.getRow() == 1)
         return true;
       else
         return false;
-    }
-    catch (Exception ex) {
+    } catch (Exception ex) {
       System.err.println(ex.getLocalizedMessage());
       try {
         conn.rollback();
         conn.setAutoCommit(true);
-      }
-      catch (SQLException ex2) {
+      } catch (SQLException ex2) {
         ex2.printStackTrace();
       }
       return false;
     }
   }
 
-  public boolean canSearchAbstracts(){
-    if(abstracts.size() > 0)
+  public boolean canSearchAbstracts() {
+    if (abstracts.size() > 0)
       return true;
     else
       return false;
   }
 
-  public int viewAbstracts(){
+  public int viewAbstracts() {
     return 0;
   }
 
-  public int searchProfessors(List<String> keywords){
+  public int searchProfessors(List<String> keywords) {
     return 0;
   }
 
-  public void loadAbstracts(File file){
+  public void loadAbstracts(File file) {
     abstracts = new LinkedList<Abstract>();
     try {
       conn.setAutoCommit(false);
       stmt = conn.createStatement();
       rs = stmt.executeQuery("SELECT * FROM abstract;");
       String description = new String();
-      while(rs.next()){
+      while (rs.next()) {
         description = file.read(rs.getString("FileName"));
-        abstracts.add(new Abstract(rs.getInt("AbstractID"),rs.getString("Title"),description));
+        abstracts.add(new Abstract(rs.getInt("AbstractID"), rs.getString("Title"), description));
       }
       conn.setAutoCommit(true);
-    }
-    catch (Exception ex) {
+    } catch (Exception ex) {
       System.err.println(ex.getLocalizedMessage());
       try {
         conn.rollback();
         conn.setAutoCommit(true);
-      }
-      catch (SQLException ex2) {
+      } catch (SQLException ex2) {
         ex2.printStackTrace();
       }
     }
@@ -99,25 +98,22 @@ public class DataLayer {
 
   /**
    * Connect the database using the cached creds.
+   *
    * @return False if failed, true if succeeded
    */
   public boolean connect(String password) {
     try {
-			conn = DriverManager.getConnection(
-        "jdbc:mysql://localhost/" + DATABASE_NAME,
-        "root",
-        password
-      );
+      conn = DriverManager.getConnection("jdbc:mysql://localhost/" + DATABASE_NAME, "root", password);
       return true;
-		}
-		catch(SQLException sqle) {
-			sqle.printStackTrace();
+    } catch (SQLException sqle) {
+      sqle.printStackTrace();
       return false;
-		}
+    }
   }
 
   /**
    * Closes the existing database connection if there is one.
+   *
    * @return False if failed, true if succeeded.
    */
   public boolean close() {
@@ -126,8 +122,7 @@ public class DataLayer {
         conn.close();
         return conn.isClosed();
       }
-    }
-    catch (Exception ex) {
+    } catch (Exception ex) {
       return false;
     }
     return true;
