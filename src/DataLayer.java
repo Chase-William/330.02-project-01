@@ -25,7 +25,7 @@ public class DataLayer {
   ) {
     try {
       conn.setAutoCommit(false);
-      CallableStatement calledStmt = conn.prepareCall("{ CALL insertAbstractWithAuthors(?, ? ,? ,? ,? ,? ,? ,?) }");
+      CallableStatement calledStmt = conn.prepareCall("{ CALL insertAbstractWithAuthors(?, ? ,? ,? ,? ,? ,?) }");
       calledStmt.setInt(1, facultyID);
       calledStmt.setString(2, title);
       calledStmt.setString(3, content);
