@@ -1,23 +1,29 @@
 Directions:
 
-1. Using mySQL command line client, SOURCE the file projectGroup1.sql.
-2. Ensure you have mysql-connector-java in your class paths.
-3. Ensure you have PresentationLayer.java and DataLayer.java in the same folder.
+
+1. Extract the zip file 330.02-project-01 into a folder
+2. Using mySQL command line client, SOURCE the file projectGroup1.sql that is in vendor folder.
+3. Ensure you have mysql-connector-java in your class paths.
 4. Run PresentationLayer.java, enter the database with the root password (likely "student").
-
-5. Use the menu. We recommend the following:
-5.a. Enter "1" for professor
-5.b. Enter "jh0000@g.rit.edu" for email
-5.c. Enter "ihavenopassword" for password
-5.d. Enter "1" to add new abstracts
-5.e. Enter "abstract.txt"
-5.f. Enter "2" to log out
-
-6. Run through step 5 again, if there are errors, it is recommended to run through step 1 to 5 entirely.
-6.a. Enter "2" for student without the quotation mark
-6.b. Enter "1" to add key phrases
-6.c. Enter "2" to add 2 key phrases
-6.d. Enter "C++"
-6.e. Enter "Java"
-6.f. Enter "2" to search for existing abstracts
-6.g. Enter "3" to log out or "4" to exit the program
+5. Use the menu. (A picture guide is named output.png -- ) We recommend the following:
+   1. Enter "1" for professor
+   2. Enter "jh0000@g.rit.edu" for email
+   3. Enter "ihavenopassword" for password
+   4. Enter "1" to add new abstract
+   5. Enter a title
+   6. Enter the content
+   7. Enter the first name of the first author
+   8. Enter the last name of the first author
+   9. Enter the first name of the second author (may leave empty if there is no second author)
+   10. Enter the second name of the second author (may leave empty if there is no second author)
+   11. Enter “2” to display a list of the abstracts
+   12. Enter “2” to view the first abstract (Learn C and C++ by Samples)
+   13. Enter “1” to leave the viewing
+   14. Enter “3” to log out
+   15. Enter "2" for student
+   16. Enter "rs404@g.rit.edu" for email
+   17. Enter "1" to search for existing abstracts with key phrases
+   18. Enter "C++"
+   19. Enter "C3"
+   20. Enter "Python"
+   21. Enter ("2" to log out or) "3" to exit the program
