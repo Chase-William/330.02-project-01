@@ -37,9 +37,11 @@ public class DataLayer {
       
       conn.commit();
       conn.setAutoCommit(true);
+
       return true;
     }
     catch (Exception ex) {
+      ex.printStackTrace();
       try {
         conn.rollback();
         conn.setAutoCommit(true); 
