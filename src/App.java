@@ -9,9 +9,9 @@ public class App {
 
    private DataLayer data;
    private Scanner scan;
-   final String logMenu = "\n\033[0;36mAre you a professor or student?\n\033[0;35m1. Professor\n2. Student\n3. Exit the program";
-   final String studentMenu = "\n\033[0;36mWhat would like you to do?\n\033[0;35m1. Search professor(s) via interests\n2. Log out\n3. Exit the program";
-   final String professorMenu = "\n\033[0;36mWhat would you like to do?\n\033[0;35m1. Add an abstract\n2. Display absracts\n3. Log out\n4. Exit the program";
+   final String logMenu = "\nAre you a professor or student?\n1. Professor\n2. Student\n3. Exit the program";
+   final String studentMenu = "\nWhat would like you to do?\n1. Search professor(s) via interests\n2. Log out\n3. Exit the program";
+   final String professorMenu = "\nWhat would you like to do?\n1. Add an abstract\n2. Display absracts\n3. Log out\n4. Exit the program";
 
    public App(DataLayer data, Scanner scan) {
       this.data = data;
@@ -19,8 +19,8 @@ public class App {
    }
 
    public void run() {
-   
-      if (data.connect()) { // use the password you use to connect your sql service
+
+      if (data.connect()) {
          data.loadAbstracts(new File());
          System.out.println("Welcome to FacultyResearch!");
          menu("login", "[1-3]", logMenu);
@@ -28,7 +28,7 @@ public class App {
    }
 
    public void logIn(String user) {
-      System.out.println("\n\033[0;34mYou are logging in as a " + user + "\n\nPlease enter your email and password\033[0m");
+      System.out.println("\nYou are logging in as a " + user + "\n\nPlease enter your email and password");
       System.out.print("Email: ");
       String email = scan.nextLine();
 
@@ -43,18 +43,18 @@ public class App {
 
       if (isSuccess) {
          if (data.user != null)
-            System.out.println("\n\033[0;32mSuccessfully logged in.\nWelcome, " + data.user.getFirstName() + " "
+            System.out.println("\nSuccessfully logged in.\nWelcome, " + data.user.getFirstName() + " "
                   + data.user.getLastName() + "!");
          if (user.equals("professor"))
             menu("professor", "[1-4]", professorMenu);
          else if (user.equals("student"))
             menu("student", "[1-3]", studentMenu);
       } else
-         System.out.println("\n\033[0;31mThe email or password you entered is either incorrect or not in the system.");
+         System.out.println("\nThe email or password you entered is either incorrect or not in the system.");
    }
 
    public void logOut() {
-      System.out.println("\n\033[0;32mSuccessfully logged out.");
+      System.out.println("\nSuccessfully logged out.");
       data.user = null;
       menu("login", "[1-3]", logMenu);
    }
@@ -64,43 +64,43 @@ public class App {
          int input = getInput(regexCondition, menuString);
          if (input > 0) {
             switch (typeMenu) {
-            case "login": logChoice(input);
-            case "professor": professorChoice(input);
-            case "student": studentChoice(input);
+            case "login": logChoice(input); break;
+            case "professor": professorChoice(input); break;
+            case "student": studentChoice(input); break;
             }
          } else
-            System.out.println("\n\033[0;31mYou have entered invalid input, please try again");
+            System.out.println("\nYou have entered invalid input, please try again");
       }
    }
 
    public void logChoice(int input) {
       switch (input) {
-      case 1: logIn("professor");
-      case 2: logIn("student");
-      case 3: exit();
+      case 1: logIn("professor"); break;
+      case 2: logIn("student"); break;
+      case 3: exit(); break;
       }
    }
 
    public void professorChoice(int input) {
       switch (input) {
-      case 1: insertAbstract();
-      case 2: searchAbstracts();
-      case 3: logOut();
-      case 4: exit();
+      case 1: insertAbstract(); break;
+      case 2: searchAbstracts(); break;
+      case 3: logOut(); break;
+      case 4: exit(); break;
       }
    }
 
    public void studentChoice(int input) {
       switch (input) {
-      case 1: searchProfessors();
-      case 2: logOut();
-      case 3: exit();
+      case 1: searchProfessors(); break;
+      case 2: logOut(); break;
+      case 3: exit(); break;
       }
    }
 
    public int getInput(String regexCondition, String menuString) {
       System.out.println(menuString);
-      System.out.print("\033[0;36mOption:\033[0m ");
+      System.out.print("Option: ");
       String input = scan.nextLine();
       if (input.matches(regexCondition))
          return Integer.parseInt(input);
@@ -113,7 +113,7 @@ public class App {
    }
 
    public void insertAbstract() {
-      System.out.print("Entering an Abstract\nEnter Title: ");
+      System.out.print("\nEntering an Abstract\nEnter Title: ");
       String title = scan.nextLine();
       System.out.print("Content of the Abstract: ");
       String content = scan.nextLine();
@@ -135,13 +135,12 @@ public class App {
       if (data.canSearchAbstracts()) {
          while (true) {
             int count = 1;
-            System.out.println(
-                  "\n\033[0;36mEnter option to view abstract's detail\n\033[0;35m" + count + ". Cancel searching");
+            System.out.println("\nEnter option to view abstract's detail\n" + count + ". Cancel searching");
             for (Abstract a : data.abstracts) {
                count++;
                System.out.println(count + ". " + (a.getTitle()));
             }
-            System.out.print("\033[0;36mOption:\033[0m ");
+            System.out.print("Option: ");
             String input = scan.nextLine();
             if (tryParseInt(input)) {
                if (Integer.parseInt(input) > 1 && Integer.parseInt(input) <= count)
@@ -149,7 +148,7 @@ public class App {
                else
                   break;
             } else
-               System.out.println("\n\033[0;31mYou have entered invalid input");
+               System.out.println("\nYou have entered invalid input");
          }
       }
    }
@@ -164,7 +163,7 @@ public class App {
    }
 
    public void searchProfessors() {
-      System.out.println("\n\033[0;36m(You can enter as a blank to ignore the # interest and proceed the search)\nEnter an interest (up to 3)\033[0m");
+      System.out.println("\n(You can enter as a blank to ignore the # interest and proceed the search)\nEnter an interest (up to 3)");
       List<String> keywordList = new LinkedList<String>();
       for(int i = 0; i < 3; i++){
          System.out.print("#"+(i+1)+" interest: ");
@@ -183,7 +182,7 @@ public class App {
          data.searchProfessors(keywordList);
       }
       else
-         System.out.println("\n\033[0;31mYou haven't entered a single interest");
+         System.out.println("\nYou haven't entered a single interest");
    }
 
    public static void main(String[] args) throws Exception {
