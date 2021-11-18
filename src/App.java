@@ -1,3 +1,6 @@
+// Group 1: Austin Bernal, Chase Roth, Quoc Nhan, Rachel Miller, Sam Sit
+// Group Project - ISTE-330
+
 import java.util.*;
 import models.*;
 import services.File;
@@ -16,7 +19,8 @@ public class App {
    }
 
    public void run() {
-      if (data.connect("qn182535")) { // use the password you use to connect your sql service
+   
+      if (data.connect()) { // use the password you use to connect your sql service
          data.loadAbstracts(new File());
          System.out.println("Welcome to FacultyResearch!");
          menu("login", "[1-3]", logMenu);
@@ -60,9 +64,9 @@ public class App {
          int input = getInput(regexCondition, menuString);
          if (input > 0) {
             switch (typeMenu) {
-            case "login" -> logChoice(input);
-            case "professor" -> professorChoice(input);
-            case "student" -> studentChoice(input);
+            case "login": logChoice(input);
+            case "professor": professorChoice(input);
+            case "student": studentChoice(input);
             }
          } else
             System.out.println("\n\033[0;31mYou have entered invalid input, please try again");
@@ -71,26 +75,26 @@ public class App {
 
    public void logChoice(int input) {
       switch (input) {
-      case 1 -> logIn("professor");
-      case 2 -> logIn("student");
-      case 3 -> exit();
+      case 1: logIn("professor");
+      case 2: logIn("student");
+      case 3: exit();
       }
    }
 
    public void professorChoice(int input) {
       switch (input) {
-      case 1 -> insertAbstract();
-      case 2 -> searchAbstracts();
-      case 3 -> logOut();
-      case 4 -> exit();
+      case 1: insertAbstract();
+      case 2: searchAbstracts();
+      case 3: logOut();
+      case 4: exit();
       }
    }
 
    public void studentChoice(int input) {
       switch (input) {
-      case 1 -> searchProfessors();
-      case 2 -> logOut();
-      case 3 -> exit();
+      case 1: searchProfessors();
+      case 2: logOut();
+      case 3: exit();
       }
    }
 

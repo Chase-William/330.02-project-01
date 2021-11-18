@@ -1,3 +1,6 @@
+-- Group 1: Austin Bernal, Chase Roth, Quoc Nhan, Rachel Miller, Sam Sit
+-- Group Project - ISTE-330
+
 CREATE DATABASE  IF NOT EXISTS `facultyresearch` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `facultyresearch`;
 -- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)

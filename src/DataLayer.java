@@ -1,3 +1,6 @@
+// Group 1: Austin Bernal, Chase Roth, Quoc Nhan, Rachel Miller, Sam Sit
+// Group Project - ISTE-330
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.sql.*;
@@ -190,9 +193,12 @@ public class DataLayer {
    *
    * @return False if failed, true if succeeded
    */
-  public boolean connect(String password) {
+  public boolean connect() {
     try {
-      conn = DriverManager.getConnection("jdbc:mysql://localhost/" + DATABASE_NAME, "root", password);
+	   Scanner scanner = new Scanner(System.in);
+      System.out.print("Input database password for root user: ");
+      String pass = scanner.nextLine();
+      conn = DriverManager.getConnection("jdbc:mysql://localhost/" + DATABASE_NAME, "root", pass);
       return true;
     } catch (SQLException sqle) {
       sqle.printStackTrace();
