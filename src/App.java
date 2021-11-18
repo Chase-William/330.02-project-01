@@ -8,7 +8,7 @@ public class App {
    private Scanner scan;
    final String logMenu = "\n\033[0;36mAre you a professor or student?\n\033[0;35m1. Professor\n2. Student\n3. Exit the program";
    final String studentMenu = "\n\033[0;36mWhat would like you to do?\n\033[0;35m1. Search professor(s) via interests\n2. Log out\n3. Exit the program";
-   final String professorMenu = "\n\033[0;36mWhat would you like to do?\n\033[0;35m1. Search and subscribe to abstracts\n2. View subscribed abstracts\n3. Log out\n4. Exit the program";
+   final String professorMenu = "\n\033[0;36mWhat would you like to do?\n\033[0;35m1. Add an abstract\n2. Display absracts\n3. Log out\n4. Exit the program";
 
    public App(DataLayer data, Scanner scan) {
       this.data = data;
@@ -16,16 +16,15 @@ public class App {
    }
 
    public void run() {
-      if (data.connect("Csharp304360283")) {
-         //data.loadAbstracts(new File());
+      if (data.connect("qn182535")) { // use the password you use to connect your sql service
+         data.loadAbstracts(new File());
          System.out.println("Welcome to FacultyResearch!");
          menu("login", "[1-3]", logMenu);
       }
    }
 
    public void logIn(String user) {
-      System.out
-            .println("\n\033[0;34mYou are logging in as a " + user + "\n\nPlease enter your email and password\033[0m");
+      System.out.println("\n\033[0;34mYou are logging in as a " + user + "\n\nPlease enter your email and password\033[0m");
       System.out.print("Email: ");
       String email = scan.nextLine();
 
@@ -82,9 +81,8 @@ public class App {
       switch (input) {
       case 1 -> insertAbstract();
       case 2 -> searchAbstracts();
-      case 3 -> viewAbstracts();
-      case 4 -> logOut();
-      case 5 -> exit();
+      case 3 -> logOut();
+      case 4 -> exit();
       }
    }
 
@@ -111,23 +109,22 @@ public class App {
    }
 
    public void insertAbstract() {
-      System.out.print("Entering an Abstract\n\tEnter Title: ");
+      System.out.print("Entering an Abstract\nEnter Title: ");
       String title = scan.nextLine();
-      System.out.print("Entering an Abstract\n\tContent of the Abstract: ");
+      System.out.print("Content of the Abstract: ");
       String content = scan.nextLine();
-      System.out.print("Entering an Abstract\n\tFirst Name of the First Author: ");
+      System.out.print("First Name of the First Author: ");
       String firstAuthorFirstName = scan.nextLine();
-      System.out.print("Entering an Abstract\n\tLast Name of the First Author: ");
+      System.out.print("Last Name of the First Author: ");
       String firstAuthorLastName = scan.nextLine();
-      System.out.print("Entering an Abstract\n\tFirst Name of the Second Author: ");
+      System.out.print("First Name of the Second Author: ");
       String secondAuthorFirstName = scan.nextLine();
-      System.out.print("Entering an Abstract\n\tLast Name of the Second Author: ");
+      System.out.print("Last Name of the Second Author: ");
       String secondAuthorLastName = scan.nextLine();
       if (data.insertAbstract(data.user.getUserID(), title, content, firstAuthorFirstName, firstAuthorLastName, secondAuthorFirstName, secondAuthorLastName)){
         System.out.println("Successfully Inserted the Abstract!");
-      } else {
+      } else
         System.out.println("Failed to Insert the Abstract!");
-      }
    }
 
    public void searchAbstracts() {
@@ -162,15 +159,27 @@ public class App {
       }
    }
 
-   public void viewAbstracts() {
-      System.out.println("\nthis function [viewAbstracts] is out of service");
-      // data.viewAbstracts();
-   }
-
    public void searchProfessors() {
-      System.out.println("\nthis function [searchProfessors] is out of service");
-      // List<String> keywordList = new LinkedList();
-      // data.searchProfessor(keywordList);
+      System.out.println("\n\033[0;36m(You can enter as a blank to ignore the # interest and proceed the search)\nEnter an interest (up to 3)\033[0m");
+      List<String> keywordList = new LinkedList<String>();
+      for(int i = 0; i < 3; i++){
+         System.out.print("#"+(i+1)+" interest: ");
+         String input = scan.nextLine();
+         if(!input.equals(""))
+            keywordList.add(input);
+         else
+            break;
+      }
+      if(keywordList.size() > 0){
+         String output = "\nYou have entered";
+         for(String s : keywordList){
+            output += " | "+s;
+         }
+         System.out.println(output+" | ");
+         data.searchProfessors(keywordList);
+      }
+      else
+         System.out.println("\n\033[0;31mYou haven't entered a single interest");
    }
 
    public static void main(String[] args) throws Exception {

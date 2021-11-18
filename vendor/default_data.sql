@@ -99,6 +99,7 @@ END $$
 
 DELIMITER ;
 
+CALL insertFaculty("Jim", "Habermas", "jh0000@g.rit.edu", 130, 140, "ihavenopassword");
 CALL insertFaculty("Leon", "West", "lw533@g.rit.edu", 130, 140, "s1v$c86gjil");
 CALL insertFaculty("Kristin", "Valentine", "kv6870@g.rit.edu", 150, 150, "*s$9d*");
 CALL insertFaculty("Leandro", "Douglas", "ld5126@g.rit.edu", 60, 130, "emz!b%mruo");
