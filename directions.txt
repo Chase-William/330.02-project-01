@@ -1,0 +1,23 @@
+Directions:
+
+1. Using mySQL command line client, SOURCE the file projectGroup1.sql.
+2. Ensure you have mysql-connector-java in your class paths.
+3. Ensure you have PresentationLayer.java and DataLayer.java in the same folder.
+4. Run PresentationLayer.java, enter the database with the root password (likely "student").
+
+5. Use the menu. We recommend the following:
+5.a. Enter "1" for professor
+5.b. Enter "jh0000@g.rit.edu" for email
+5.c. Enter "ihavenopassword" for password
+5.d. Enter "1" to add new abstracts
+5.e. Enter "abstract.txt"
+5.f. Enter "2" to log out
+
+6. Run through step 5 again, if there are errors, it is recommended to run through step 1 to 5 entirely.
+6.a. Enter "2" for student without the quotation mark
+6.b. Enter "1" to add key phrases
+6.c. Enter "2" to add 2 key phrases
+6.d. Enter "C++"
+6.e. Enter "Java"
+6.f. Enter "2" to search for existing abstracts
+6.g. Enter "3" to log out or "4" to exit the program
