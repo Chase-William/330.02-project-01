@@ -25,14 +25,13 @@ public class DataLayer {
   ) {
     try {
       conn.setAutoCommit(false);
-      CallableStatement calledStmt = conn.prepareCall("{ CALL insertAbstractWithAuthors(?, ? ,? ,? ,? ,? ,?) }");
+      CallableStatement calledStmt = conn.prepareCall("{ CALL insertAbstractWithAuthors(?, ? ,? ,? ,? ,?) }");
       calledStmt.setInt(1, facultyID);
-      calledStmt.setString(2, title);
-      calledStmt.setString(3, content);
-      calledStmt.setString(4, firstAuthorFirstName);
-      calledStmt.setString(5, firstAuthorLastName);
-      calledStmt.setString(6, secondAuthorFirstName);
-      calledStmt.setString(7, secondAuthorLastName);
+      calledStmt.setString(2, title);      
+      calledStmt.setString(3, firstAuthorFirstName);
+      calledStmt.setString(4, firstAuthorLastName);
+      calledStmt.setString(5, secondAuthorFirstName);
+      calledStmt.setString(6, secondAuthorLastName);
       calledStmt.executeQuery();
       
       conn.commit();
