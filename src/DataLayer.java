@@ -1,3 +1,5 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.sql.*;
 import java.util.*;
 import models.*;
@@ -36,6 +38,10 @@ public class DataLayer {
       
       conn.commit();
       conn.setAutoCommit(true);
+
+      BufferedWriter writer = new BufferedWriter(new FileWriter("data/abstracts/abstract-" + facultyID));
+      writer.write(content);      
+      writer.close();
 
       return true;
     }
