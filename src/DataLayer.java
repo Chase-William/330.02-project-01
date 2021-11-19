@@ -151,7 +151,7 @@ public class DataLayer {
       rs = stmt.executeQuery(sql);
       System.out.println();
       while (rs.next())
-        System.out.println("\033[0;33m"+rs.getString("FirstName")+" "+rs.getString("LastName") + " | Building room - " + rs.getString("BuildingNumber") + " | Office room - " + rs.getString("OfficeNumber") + " | Email - " + rs.getString("Email"));
+        System.out.println(rs.getString("FirstName")+" "+rs.getString("LastName") + " | Building room - " + rs.getString("BuildingNumber") + " | Office room - " + rs.getString("OfficeNumber") + " | Email - " + rs.getString("Email"));
 
       conn.setAutoCommit(true);
     } catch (Exception ex) {

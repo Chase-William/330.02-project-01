@@ -5,7 +5,7 @@ import java.util.*;
 import models.*;
 import services.File;
 
-public class Presentation {
+public class PresentationLayer {
 
    private DataLayer data;
    private Scanner scan;
@@ -13,7 +13,7 @@ public class Presentation {
    final String studentMenu = "\nWhat would like you to do?\n1. Search professor(s) via interests\n2. Log out\n3. Exit the program";
    final String professorMenu = "\nWhat would you like to do?\n1. Add an abstract\n2. Display absracts\n3. Log out\n4. Exit the program";
 
-   public Presentation(DataLayer data, Scanner scan) {
+   public PresentationLayer(DataLayer data, Scanner scan) {
       this.data = data;
       this.scan = scan;
    }
@@ -28,7 +28,10 @@ public class Presentation {
    }
 
    public void logIn(String user) {
-      System.out.println("\nYou are logging in as a " + user + "\n\nPlease enter your email and password");
+      String logSentence = "\nYou are logging in as a " + user + "\n\nPlease enter your email";
+      if(user.equals("professor"))
+         logSentence += " and password";
+      System.out.println(logSentence);
       System.out.print("Email: ");
       String email = scan.nextLine();
 
@@ -186,7 +189,7 @@ public class Presentation {
    }
 
    public static void main(String[] args) throws Exception {
-      Presentation app = new Presentation(new DataLayer(), new Scanner(System.in));
+      PresentationLayer app = new PresentationLayer(new DataLayer(), new Scanner(System.in));
       app.run();
    }
 }
