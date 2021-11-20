@@ -1,0 +1,29 @@
+Directions:
+
+
+1. Extract the zip file 330.02-project-01 into a folder
+2. Using mySQL command line client, SOURCE the file sourceThis.sql that is in vendor folder.
+3. Ensure you have mysql-connector-java in your class paths.
+4. Run PresentationLayer.java, enter the database with the root password (likely "student").
+5. Use the menu. (A picture guide is named output.png -- ) We recommend the following:
+   1. Enter "1" for professor
+   2. Enter "jh0000@g.rit.edu" for email
+   3. Enter "ihavenopassword" for password
+   4. Enter "1" to add new abstract
+   5. Enter a title
+   6. Enter the content
+   7. Enter the first name of the first author
+   8. Enter the last name of the first author
+   9. Enter the first name of the second author (may leave empty if there is no second author)
+   10. Enter the second name of the second author (may leave empty if there is no second author)
+   11. Enter “2” to display a list of the abstracts
+   12. Enter “2” to view the first abstract (Learn C and C++ by Samples)
+   13. Enter “1” to leave the viewing
+   14. Enter “3” to log out
+   15. Enter "2" for student
+   16. Enter "rs404@g.rit.edu" for email
+   17. Enter "1" to search for existing abstracts with key phrases
+   18. Enter "C++"
+   19. Enter "C3"
+   20. Enter "Python"
+   21. Enter ("2" to log out or) "3" to exit the program

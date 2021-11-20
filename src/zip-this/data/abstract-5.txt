@@ -1,0 +1,1 @@
+Exploring C++ divides C++ up into bite-sized chunks that will help you learn the language one step at a time. Assuming no familiarity with C++, or any other C-based language, you’ll be taught everything you need to know in a logical progression of small lessons that you can work through as quickly or as slowly as you need.
