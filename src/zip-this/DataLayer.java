@@ -75,8 +75,8 @@ public class DataLayer {
   }
 
   public boolean checkLog(String email, String password) {
-    //String sql = "SELECT * FROM user JOIN faculty USING(UserID) WHERE UserType = 0 AND Email = '"+email+"' AND Password = '"+password+"';";
-    String sql = "SELECT * FROM user JOIN faculty USING(UserID) WHERE UserType = 0 AND Email = 'lw533@g.rit.edu' AND Password = 's1v$c86gjil';";
+    String sql = "SELECT * FROM user JOIN faculty USING(UserID) WHERE UserType = 0 AND Email = '"+email+"' AND Password = '"+password+"';";
+    //String sql = "SELECT * FROM user JOIN faculty USING(UserID) WHERE UserType = 0 AND Email = 'lw533@g.rit.edu' AND Password = 's1v$c86gjil';";
     return executeLog(sql, "professor");
   }
 
