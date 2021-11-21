@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS `facultyResearch`;
+
 CREATE DATABASE IF NOT EXISTS `facultyResearch` DEFAULT CHARACTER SET utf8 ;
 USE `facultyResearch` ;
 
