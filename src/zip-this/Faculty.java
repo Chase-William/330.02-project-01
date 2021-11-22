@@ -1,5 +1,3 @@
-package models;
-
 public class Faculty extends User {
   private String password;
   private int buildingNumber;

@@ -1,5 +1,3 @@
-package models;
-
 public class Keyword{
    private int keywordID;
    private String text;

@@ -1,5 +1,3 @@
-package models;
-
 public class Author {
   private int authorID;
   private String firstName;

@@ -1,5 +1,3 @@
-package models;
-
 public class User {
   public enum UserType {
     FACULTY,
