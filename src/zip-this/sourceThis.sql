@@ -1,3 +1,6 @@
+-- Group 1: Austin Bernal, Chase Roth, Quoc Nhan, Rachel Miller, Sam Sit
+-- Group Project - ISTE-330
+
 DROP DATABASE IF EXISTS `facultyResearch`;
 
 CREATE DATABASE IF NOT EXISTS `facultyResearch` DEFAULT CHARACTER SET utf8 ;
