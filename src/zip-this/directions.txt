@@ -1,17 +1,23 @@
+Group 1: Austin Bernal, Chase Roth, Quoc Nhan, Rachel Miller, Sam Sit
+Group Project - ISTE-330
+
 Directions:
 
-
 1. Extract the zip file 330.02-project-01 into a folder
-2. Using mySQL command line client, SOURCE the file sourceThis.sql that is in vendor folder.
-3. Ensure you have mysql-connector-java in your class paths.
-4. Run PresentationLayer.java, enter the database with the root password (likely "student").
-5. Use the menu. (A picture guide is named output.png -- ) We recommend the following:
+2. Ensure the following:
+   1. you have Java (OpenJDK version 14)
+   2. you have mysql-connector-java (version 8.0.21) in your class paths in jGrasp.
+3. Compile DataLayer.java and PresentationLayer.java
+4. Using mySQL command line client, SOURCE the file sourceThis.sql.
+5. Run PresentationLayer.java in jGrasp.
+6. Enter the database with the root password (likely "student").
+7. Use the menu. We recommend the following:
    1. Enter "1" for professor
    2. Enter "jh0000@g.rit.edu" for email
    3. Enter "ihavenopassword" for password
    4. Enter "1" to add new abstract
    5. Enter a title
-   6. Enter the description
+   6. Enter the descript i.e. the abstract’s content
    7. Enter the first name of the first author
    8. Enter the last name of the first author
    9. Enter the first name of the second author (may leave empty if there is no second author)
