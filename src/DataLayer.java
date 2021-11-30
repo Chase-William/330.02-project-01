@@ -4,6 +4,7 @@
 import java.io.*;
 import java.sql.*;
 import java.util.*;
+import models.*;
 
 public class DataLayer {
 
@@ -39,7 +40,7 @@ public class DataLayer {
       conn.commit();
       conn.setAutoCommit(true);
 
-      BufferedWriter writer = new BufferedWriter(new FileWriter(getFileNameOfNewAbstract(title, firstAuthorFirstName)+".txt"));
+      BufferedWriter writer = new BufferedWriter(new FileWriter("data/"+getFileNameOfNewAbstract(title, firstAuthorFirstName)+".txt"));
       writer.write(description);
       writer.close();
       return true;
@@ -227,7 +228,7 @@ public class DataLayer {
   public String read(String fileName){
     String line;
     String description = new String();
-    try (BufferedReader br = new BufferedReader(new FileReader(fileName+".txt"))) {
+    try (BufferedReader br = new BufferedReader(new FileReader("data/"+fileName+".txt"))) {
         while ((line = br.readLine()) != null) {
             description += line;
         }

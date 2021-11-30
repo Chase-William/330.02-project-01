@@ -11,7 +11,7 @@ Directions:
    3. Enter "ihavenopassword" for password
    4. Enter "1" to add new abstract
    5. Enter a title
-   6. Enter the content
+   6. Enter the content -- make sure there are no new lines in it
    7. Enter the first name of the first author
    8. Enter the last name of the first author
    9. Enter the first name of the second author (may leave empty if there is no second author)
