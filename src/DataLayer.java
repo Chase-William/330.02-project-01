@@ -208,7 +208,7 @@ public class DataLayer {
     }
   }
 
-  public void searchStudent(String keyword){
+  public boolean searchStudent(String keyword){
     String sql = "SELECT * FROM StudentKeyword JOIN Keyword USING(KeywordID) WHERE name ='"+keyword+"'";
     List<Integer> studentIds = new ArrayList<Integer>();
     try {
@@ -228,8 +228,11 @@ public class DataLayer {
         ex2.printStackTrace();
       }
     }
-    if(studentIds.size() > 0)
+    if(studentIds.size() > 0) {
       displayStudent(studentIds);
+      return true;
+    }
+    return false;
   }
 
   public void displayStudent(List<Integer> userIds){

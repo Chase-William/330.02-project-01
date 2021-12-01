@@ -225,7 +225,9 @@ public class PresentationLayer {
    public void searchStudent() {
       System.out.print("\nEnter a keyword: ");
       String input = scan.nextLine();
-      data.searchStudent(input);
+      boolean result = data.searchStudent(input);
+      if (!result)
+         System.out.print("\nNo student(s) found.\n");
    }
 
    public static void main(String[] args) throws Exception {
