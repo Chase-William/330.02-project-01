@@ -216,7 +216,7 @@ public class PresentationLayer {
    }
 
    public void searchStudent() {
-      System.out.println("\nEnter a keyword ");
+      System.out.print("\nEnter a keyword: ");
       String input = scan.nextLine();
       data.searchStudent(input);
    }
