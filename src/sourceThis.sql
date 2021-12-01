@@ -318,7 +318,7 @@ CALL insertAbstractWithAuthors(5, "Java Program Design: Principles, Polymorphism
 CALL insertAbstractWithAuthors(6, "Practical C++ Design", "Adam", "Singer", NULL, NULL);
 CALL insertAbstractWithAuthors(7, "Pro Python 3", "J.", "Browning", "Marty", "Alchin");
 CALL insertAbstractWithAuthors(8, "Java: The Good Parts", "Jim", "Waldo", NULL, NULL);
-
+CALL insertAbstractWithAuthors(9, "Advanced Algorithms and Data Structures", "Marcello", "Rocca", NULL, NULL);
 
 CALL insertStudent("Regan", "Suarez", "rs404@g.rit.edu");
 CALL insertStudent("Elise", "Holden", "eh6257@g.rit.edu");
@@ -370,5 +370,3 @@ CALL insertStudent("Kamryn", "Burton", "kb9530@g.rit.edu");
 CALL insertStudent("Luciano", "Rich", "lr4460@g.rit.edu");
 CALL insertStudent("Elianna", "Shelton", "es4452@g.rit.edu");
 CALL insertStudent("Rory", "Cantu", "rc5606@g.rit.edu");
-
-CALL insertKeywordWithStudent(53, "C");
