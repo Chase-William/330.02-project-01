@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `StudentKeyword` (
   CONSTRAINT `StudentKeyword_Keyword_fk`
     FOREIGN KEY (`KeywordID`)
     REFERENCES `Keyword` (`KeywordID`)
-    ON DELETE CASCADE
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
@@ -235,22 +235,6 @@ BEGIN
   -- Insert UserAbstract
   INSERT INTO UserAbstract
     VALUES (facultyID, @abID);
-END $$
-
--- insert keyword with student
-CREATE PROCEDURE insertKeywordWithStudent(
-  IN studentID INT,
-  IN word VARCHAR(45)
-)
-BEGIN
-  -- Insert keyword
-  INSERT INTO keyword (Name) 
-    VALUES (word);
-  SET @keywordID = @@identity;
-
-  -- Insert studentKeyword
-  INSERT INTO studentkeyword
-    VALUES (studentID, @keywordID);
 END $$
 
 DELIMITER ;
@@ -369,5 +353,3 @@ CALL insertStudent("Kamryn", "Burton", "kb9530@g.rit.edu");
 CALL insertStudent("Luciano", "Rich", "lr4460@g.rit.edu");
 CALL insertStudent("Elianna", "Shelton", "es4452@g.rit.edu");
 CALL insertStudent("Rory", "Cantu", "rc5606@g.rit.edu");
-
-CALL insertKeywordWithStudent(53, "C");
