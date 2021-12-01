@@ -142,6 +142,7 @@ DROP PROCEDURE IF EXISTS insertUser;
 DROP PROCEDURE IF EXISTS insertFaculty;
 DROP PROCEDURE IF EXISTS insertStudent;
 DROP PROCEDURE IF EXISTS insertAbstractWithAuthors;
+DROP PROCEDURE IF EXISTS insertKeywordWithStudent;
 
 DELIMITER $$
 
