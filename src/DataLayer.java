@@ -81,7 +81,8 @@ public class DataLayer {
   }
 
   public boolean checkLog(String email) {
-    String sql = "SELECT * FROM user JOIN student USING(UserID) WHERE Email = '" + email + "';";
+    // String sql = "SELECT * FROM user JOIN student USING(UserID) WHERE Email = '" + email + "';";
+    String sql = "SELECT * FROM user JOIN student USING(UserID) WHERE Email = 'rs404@g.rit.edu';";
     return executeLog(sql, "student");
   }
 
@@ -128,8 +129,8 @@ public class DataLayer {
     List<Integer> facultyIds = new ArrayList<Integer>();
     for(String word : keywords)
       sql += " title LIKE '%"+word+"%' OR";
-    sql = sql.substring(0, sql.length() - 3);
-    sql += ";";
+      sql = sql.substring(0, sql.length() - 3);
+      sql += ";";
     try {
       conn.setAutoCommit(false);
       stmt = conn.createStatement();
@@ -148,6 +149,7 @@ public class DataLayer {
         ex2.printStackTrace();
       }
     }
+    insertKeyword(keywords);
     if(facultyIds.size() > 0){
       displayProfessor(facultyIds);
       return true;
@@ -160,8 +162,8 @@ public class DataLayer {
     String sql = "SELECT * FROM user JOIN faculty USING(userID) WHERE";
     for(Integer id : userIds)
       sql += " userID ="+id+" OR";
-    sql = sql.substring(0, sql.length() - 3);
-    sql += ";";
+      sql = sql.substring(0, sql.length() - 3);
+      sql += ";";
     try {
       conn.setAutoCommit(false);
       stmt = conn.createStatement();
@@ -182,8 +184,78 @@ public class DataLayer {
     }
   }
 
-  public void searchStudent(String keyword){
+  public void insertKeyword(List<String> keywords){
+    String sql = "{CALL insertKeywordWithStudent(?, ?)}";
+    for(String word : keywords){
+      try {
+        conn.setAutoCommit(false);
+        CallableStatement call = conn.prepareCall(sql);
+        call.setInt(1, user.getUserID());
+        call.setString(2, word);
 
+        ResultSet rs = call.executeQuery();
+
+        conn.setAutoCommit(true);
+      } catch (Exception ex) {
+          System.err.println(ex.getLocalizedMessage());
+        try {
+          conn.rollback();
+          conn.setAutoCommit(true);
+        } catch (SQLException ex2) {
+          ex2.printStackTrace();
+        }
+      }
+    }
+  }
+
+  public void searchStudent(String keyword){
+    String sql = "SELECT * FROM StudentKeyword JOIN Keyword USING(KeywordID) WHERE name ='"+keyword+"'";
+    List<Integer> studentIds = new ArrayList<Integer>();
+    try {
+      conn.setAutoCommit(false);
+      stmt = conn.createStatement();
+      rs = stmt.executeQuery(sql);
+      while (rs.next())
+        if(!studentIds.contains(rs.getInt("UserID")))
+          studentIds.add(rs.getInt("UserID"));
+      conn.setAutoCommit(true);
+    } catch (Exception ex) {
+      System.err.println(ex.getLocalizedMessage());
+      try {
+        conn.rollback();
+        conn.setAutoCommit(true);
+      } catch (SQLException ex2) {
+        ex2.printStackTrace();
+      }
+    }
+    if(studentIds.size() > 0)
+      displayStudent(studentIds);
+  }
+
+  public void displayStudent(List<Integer> userIds){
+    String sql = "SELECT * FROM user JOIN student USING(userID) WHERE";
+    for(Integer id : userIds)
+      sql += " userID ="+id+" OR";
+      sql = sql.substring(0, sql.length() - 3);
+      sql += ";";
+    try {
+      conn.setAutoCommit(false);
+      stmt = conn.createStatement();
+      rs = stmt.executeQuery(sql);
+      System.out.println();
+      while (rs.next())
+        System.out.println(rs.getString("FirstName")+" "+rs.getString("LastName") + " | Email - " + rs.getString("Email"));
+
+      conn.setAutoCommit(true);
+    } catch (Exception ex) {
+      System.err.println(ex.getLocalizedMessage());
+      try {
+        conn.rollback();
+        conn.setAutoCommit(true);
+      } catch (SQLException ex2) {
+        ex2.printStackTrace();
+      }
+    }
   }
 
   public void loadAbstracts() {

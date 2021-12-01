@@ -174,7 +174,6 @@ public class PresentationLayer {
       }
    }
 
-
    public boolean tryParseInt(String value) {
       try {
          Integer.parseInt(value);
