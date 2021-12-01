@@ -185,11 +185,16 @@ public class PresentationLayer {
 
    public void searchProfessors() {
       System.out.println("\n(You can enter as a blank to ignore the # interest and proceed the search)\nEnter an interest (up to 3)");
+      boolean cancel = false;
       while(true){
          List<String> keywordList = new LinkedList<String>();
          for(int i = 0; i < 3; i++){
             System.out.print("#"+(i+1)+" interest: ");
             String input = scan.nextLine();
+            if(input.toLowerCase().equals("cancel")) {
+               cancel = true;
+               break;
+            }
             if(!input.equals(""))
                keywordList.add(input);
             else
@@ -205,11 +210,14 @@ public class PresentationLayer {
             if(hasProfessor)
                break;
             else
-               System.out.println("\nNo professor found, try again");
+               System.out.println("\nNo professor found, try again -- enter \"CANCEL\" to cancel search");
          }
          else{
-            System.out.println("\nYou haven't entered a single interest");
-            break;
+            if(cancel)
+               System.out.println("\nSearch cancelled.");
+            else
+               System.out.println("\nYou haven't entered a single interest.");
+               break;
          }
       }
    }
