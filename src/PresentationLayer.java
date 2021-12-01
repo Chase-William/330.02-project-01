@@ -8,9 +8,10 @@ public class PresentationLayer {
 
    private DataLayer data;
    private Scanner scan;
-   final String logMenu = "\nAre you a professor or student?\n1. Professor\n2. Student\n3. Exit the program";
+   final String logMenu = "\nAre you a professor or student?\n1. Professor\n2. Student\n3. Guest\n4. Exit the program";
    final String studentMenu = "\nWhat would like you to do?\n1. Search professor(s) via interests\n2. Log out\n3. Exit the program";
    final String professorMenu = "\nWhat would you like to do?\n1. Add an abstract\n2. Display absracts\n3. Log out\n4. Exit the program";
+   final String guestMenu = "\nWhat would you like to do?\n1. Search student(s) via keyword\n2. Log out\n3. Exit the program";
 
    public PresentationLayer(DataLayer data, Scanner scan) {
       this.data = data;
@@ -22,42 +23,48 @@ public class PresentationLayer {
       if (data.connect()) {
          data.loadAbstracts();
          System.out.println("Welcome to FacultyResearch!");
-         menu("login", "[1-3]", logMenu);
+         menu("login", "[1-4]", logMenu);
       }
    }
 
    public void logIn(String user) {
-      String logSentence = "\nYou are logging in as a " + user + "\n\nPlease enter your email";
-      if(user.equals("professor"))
-         logSentence += " and password";
-      System.out.println(logSentence);
-      System.out.print("Email: ");
-      String email = scan.nextLine();
+      if(user.equals("guest")){
+         System.out.println("\nSuccessfully logged in as a guest!");
+         menu("guest", "[1-3]", guestMenu);
+      }
+      else{
+         String logSentence = "\nYou are logging in as a " + user + "\n\nPlease enter your email";
+         if(user.equals("professor"))
+            logSentence += " and password";
+         System.out.println(logSentence);
+         System.out.print("Email: ");
+         String email = scan.nextLine();
 
-      boolean isSuccess = false;
+         boolean isSuccess = false;
 
-      if (user.equals("professor")) {
-         System.out.print("Password: ");
-         String password = scan.nextLine();
-         isSuccess = data.checkLog(email, password);
-      } else if (user.equals("student"))
-         isSuccess = data.checkLog(email);
+         if (user.equals("professor")) {
+            System.out.print("Password: ");
+            String password = scan.nextLine();
+            isSuccess = data.checkLog(email, password);
+         } else if (user.equals("student"))
+            isSuccess = data.checkLog(email);
 
-      if (isSuccess) {
-         if (data.user != null)
-            System.out.println("\nSuccessfully logged in.\nWelcome, " + data.user.getFirstName() + " " + data.user.getLastName() + "!");
-         if (user.equals("professor"))
-            menu("professor", "[1-4]", professorMenu);
-         else if (user.equals("student"))
-            menu("student", "[1-3]", studentMenu);
-      } else
-         System.out.println("\nThe email or password you entered is either incorrect or not in the system.");
+         if (isSuccess) {
+            if (data.user != null)
+               System.out.println("\nSuccessfully logged in.\nWelcome, " + data.user.getFirstName() + " " + data.user.getLastName() + "!");
+            if (user.equals("professor"))
+               menu("professor", "[1-4]", professorMenu);
+            else if (user.equals("student"))
+               menu("student", "[1-3]", studentMenu);
+         } else
+            System.out.println("\nThe email or password you entered is either incorrect or not in the system.");
+      }
    }
 
    public void logOut() {
       System.out.println("\nSuccessfully logged out.");
       data.user = null;
-      menu("login", "[1-3]", logMenu);
+      menu("login", "[1-4]", logMenu);
    }
 
    public void menu(String typeMenu, String regexCondition, String menuString) {
@@ -68,6 +75,7 @@ public class PresentationLayer {
             case "login": logChoice(input); break;
             case "professor": professorChoice(input); break;
             case "student": studentChoice(input); break;
+            case "guest": guestChoice(input); break;
             }
          } else
             System.out.println("\nYou have entered invalid input, please try again");
@@ -78,7 +86,8 @@ public class PresentationLayer {
       switch (input) {
       case 1: logIn("professor"); break;
       case 2: logIn("student"); break;
-      case 3: exit(); break;
+      case 3: logIn("guest"); break;
+      case 4: exit(); break;
       }
    }
 
@@ -94,6 +103,14 @@ public class PresentationLayer {
    public void studentChoice(int input) {
       switch (input) {
       case 1: searchProfessors(); break;
+      case 2: logOut(); break;
+      case 3: exit(); break;
+      }
+   }
+
+   public void guestChoice(int input) {
+      switch (input) {
+      case 1: searchStudent(); break;
       case 2: logOut(); break;
       case 3: exit(); break;
       }
@@ -157,6 +174,7 @@ public class PresentationLayer {
       }
    }
 
+
    public boolean tryParseInt(String value) {
       try {
          Integer.parseInt(value);
@@ -168,25 +186,39 @@ public class PresentationLayer {
 
    public void searchProfessors() {
       System.out.println("\n(You can enter as a blank to ignore the # interest and proceed the search)\nEnter an interest (up to 3)");
-      List<String> keywordList = new LinkedList<String>();
-      for(int i = 0; i < 3; i++){
-         System.out.print("#"+(i+1)+" interest: ");
-         String input = scan.nextLine();
-         if(!input.equals(""))
-            keywordList.add(input);
-         else
-            break;
-      }
-      if(keywordList.size() > 0){
-         String output = "\nYou have entered";
-         for(String s : keywordList){
-            output += " | "+s;
+      while(true){
+         List<String> keywordList = new LinkedList<String>();
+         for(int i = 0; i < 3; i++){
+            System.out.print("#"+(i+1)+" interest: ");
+            String input = scan.nextLine();
+            if(!input.equals(""))
+               keywordList.add(input);
+            else
+               break;
          }
-         System.out.println(output+" | ");
-         data.searchProfessors(keywordList);
+         if(keywordList.size() > 0){
+            String output = "\nYou have entered";
+            for(String s : keywordList){
+               output += " | "+s;
+            }
+            System.out.println(output+" | ");
+            boolean hasProfessor = data.hasProfessors(keywordList);
+            if(hasProfessor)
+               break;
+            else
+               System.out.println("\nNo professor found, try again");
+         }
+         else{
+            System.out.println("\nYou haven't entered a single interest");
+            break;
+         }
       }
-      else
-         System.out.println("\nYou haven't entered a single interest");
+   }
+
+   public void searchStudent() {
+      System.out.println("\nEnter a keyword ");
+      String input = scan.nextLine();
+      data.searchStudent(input);
    }
 
    public static void main(String[] args) throws Exception {

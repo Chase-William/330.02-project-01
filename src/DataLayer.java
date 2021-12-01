@@ -123,7 +123,7 @@ public class DataLayer {
       return false;
   }
 
-  public void searchProfessors(List<String> keywords) {
+  public boolean hasProfessors(List<String> keywords) {
     String sql = "SELECT * FROM UserAbstract JOIN Abstract USING(AbstractID) WHERE";
     List<Integer> facultyIds = new ArrayList<Integer>();
     for(String word : keywords)
@@ -148,8 +148,12 @@ public class DataLayer {
         ex2.printStackTrace();
       }
     }
-    if(facultyIds.size() > 0)
+    if(facultyIds.size() > 0){
       displayProfessor(facultyIds);
+      return true;
+    }
+    else
+      return false;
   }
 
   public void displayProfessor(List<Integer> userIds){
@@ -176,6 +180,10 @@ public class DataLayer {
         ex2.printStackTrace();
       }
     }
+  }
+
+  public void searchStudent(String keyword){
+
   }
 
   public void loadAbstracts() {
