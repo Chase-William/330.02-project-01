@@ -116,7 +116,7 @@ public class PresentationLayer {
    public void insertAbstract() {
       System.out.print("\nEntering an Abstract\nEnter Title: ");
       String title = scan.nextLine();
-      System.out.print("Description of the Abstract: ");
+      System.out.print("Content of the Abstract: ");
       String content = scan.nextLine();
       System.out.print("First Name of the First Author: ");
       String firstAuthorFirstName = scan.nextLine();
