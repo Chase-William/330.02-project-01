@@ -1,4 +1,4 @@
-Group 1: Austin Bernal, Chase Roth, Quoc Nhan, Rachel Miller, Sam Sit
+﻿Group 1: Austin Bernal, Chase Roth, Quoc Nhan, Rachel Miller, Sam Sit
 Group Project - ISTE-330
 
 
@@ -7,49 +7,56 @@ Directions:
 
 1. Extract the zip file 330.02-project-01 into a folder
 2. Ensure the following:
-   a. you have Java (OpenJDK version 14)
-   b. you have mysql-connector-java (version 8.0.21) in your class paths in jGrasp  (file is provided) by doing Settings > PATH/CLASSPATH > Workspace > New > Browse the file.
+   1. you have Java (OpenJDK version 14)
+   2. you have mysql-connector-java (version 8.0.21) in your class paths in jGrasp  (file is provided) by doing Settings > PATH/CLASSPATH > Workspace > New > Browse the file.
 3. Compile DataLayer.java and PresentationLayer.java
 4. Using mySQL command line client, SOURCE the file sourceThis.sql.
 5. Run PresentationLayer.java in jGrasp.
 6. Enter the database with the root password (likely "student").
 7. Login as student to see that there is no abstract with “database” keyword on it by following the instructions below
-   a. Enter “2” for student
-   b. Enter "rs404@g.rit.edu" for email
-   c. Enter "1" to search for existing abstracts with key phrases
-   d. Enter “database”
-   e. Enter without anything
-   f. Note that there are no professors found
-   g. Enter “2” to log out
-8. Login as professor to add an abstract by following the instructions below
-   a. Enter "1" for professor
-   b. Enter "jh0000@g.rit.edu" for email
-   c. Enter "ihavenopassword" for password
-   d. Enter "1" to add new abstract
-   e. Enter “BOOKS DATABASE” for the title
-   f. Enter the abstract’s content: “The project is based on a book database system pertaining to various needs of the user. The basic interface involves querying books according to language, title, author, publisher, ISBN. We support services for buying and selling used books or books used in specific IIT Kanpur courses. We build a personal profile page which is used for handling the transactions between various students. We  implement a "recommendation system" for recommending books to be used in a particular course in  addition to their availability in the library. The system gives advice for cheap used books available at the time, when that book is not found in the library.”
-   g. Enter “Ashish” as the first name of the first author
-   h. Enter “Gupta” as the last name of the first author
-   i. Enter the first name of the second author (may leave empty if there is no second author)
-   j. Enter the second name of the second author (may leave empty if there is no second author)
-   k. Enter “2” to display a list of the abstracts
-   l. Note that the new abstract has been added.
-   m. Enter “2” to view the first abstract (Learn C and C++ by Samples)
-   n. Enter “11” to view the new abstract that was recently added
-   o. Note that it is properly added.
-   p. Enter “1” to leave the viewing
-   q. Enter “3” to log out
-9. Login as student again to search for an abstract with “database” keyword on it by following the instructions below
-   a. Enter "2" for student
-   b. Enter "rs404@g.rit.edu" for email
-   c. Enter "1" to search for existing abstracts with key phrases
-   d. Enter “database”
-   e. Enter without anything
-   f. Note that there is now a result as the professor has recently added and abstract under his account
-10. Explore pre-existing data by following the instructions below
-   a. Enter “1”
-   b. Enter "C++"
-   c. Enter "C#"
-   d. Enter "Python"
-   e. Note that there are results of pre-existing professors that goes with pre-existing interests
-   f. Enter ("2" to log out or) "3" to exit the program
+   1. Enter “2” for student
+   2. Enter "rs404@g.rit.edu" for email
+   3. Enter "1" to search for existing abstracts with key phrases
+   4. Enter “database”
+   5. Enter without anything
+   6. Note that there are no professors found
+   7. Enter “CANCEL” to cancel search.
+   8. Enter “2” to log out
+8. Login as guest to see that there is no student with “database” keyword on it by following the instructions below
+   1. Enter “3” for guest
+   2. Enter “1” to search for student
+   3. Enter “database”
+   4. Note that there are no students found.
+   5. Enter “2” to log out.
+9. Login as professor to add an abstract by following the instructions below
+   1. Enter "1" for professor
+   2. Enter "jh0000@g.rit.edu" for email
+   3. Enter "ihavenopassword" for password
+   4. Enter "1" to add new abstract
+   5. Enter “BOOKS DATABASE” for the title
+   6. Enter the abstract’s content: “The project is based on a book database system pertaining to various needs of the user. The basic interface involves querying books according to language, title, author, publisher, ISBN. We support services for buying and selling used books or books used in specific IIT Kanpur courses. We build a personal profile page which is used for handling the transactions between various students. We  implement a "recommendation system" for recommending books to be used in a particular course in  addition to their availability in the library. The system gives advice for cheap used books available at the time, when that book is not found in the library.”
+   7. Enter “Ashish” as the first name of the first author
+   8. Enter “Gupta” as the last name of the first author
+   9. Enter the first name of the second author (may leave empty if there is no second author)
+   10. Enter the second name of the second author (may leave empty if there is no second author)
+   11. Enter “2” to display a list of the abstracts
+   12. Note that the new abstract has been added.
+   13. Enter “2” to view the first abstract (Learn C and C++ by Samples) to ensure view function works
+   14. Enter “11” to view the new abstract that was recently added
+   15. Note that it is properly added.
+   16. Enter “1” to leave the viewing
+   17. Enter “3” to log out
+10. Login as student again to search for an abstract with “database” keyword on it by following the instructions below
+   1. Enter "2" for student
+   2. Enter "rs404@g.rit.edu" for email
+   3. Enter "1" to search for existing abstracts with key phrases
+   4. Enter “database”
+   5. Enter without anything
+   6. Note that there is now a result as the professor (Jim Habermas) has recently added and abstract under his account
+   7. Enter “2” to log out
+11. Login as guest again to search for a student with “database” as interest on it by following the instructions below
+   1. Enter “3” to login as guest
+   2. Enter “1” to search for students via keyword
+   3. Enter “database”
+   4. Note that the student who recently added database as his interest appeared in the search result.
+   5. Enter “3” to terminate the program.
